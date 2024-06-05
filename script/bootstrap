@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if [[ -x "$(command -v mise)" ]]; then
+	echo "==> Installing mise dependencies..."
+	mise install
+fi
+
+if [[ -d .venv && ! "$(which python)" =~ /.venv/ ]]; then
+	echo "==> Activating venv environment..."
+	source .venv/bin/activate
+fi
+
+echo "==> Installing python dependencies..."
+pip install --upgrade pip
+pip install -r requirements_server.txt
+pip install -r requirements_dev.txt

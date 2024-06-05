@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+script/bootstrap
+
+python manage.py migrate
+
+honcho start

@@ -1,0 +1,171 @@
+@import url("https://fonts.bunny.net/css?family=nova-round:400");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply font-medium rounded-lg p-3 border;
+  }
+
+  .btn-info {
+    @apply text-white text-right text-4xl pr-5;
+  }
+
+  .btn-close {
+    @apply cursor-pointer;
+  }
+  .btn-close:after {
+    @apply text-3xl -mt-2;
+    display: inline-block;
+    content: "\00d7";
+  }
+  .min-h-lg {
+    min-height: 2rem;
+  }
+}
+
+.placeholder {
+    @apply text-gray-500;
+}
+
+@keyframes bounceInLeft {
+    0%,60%,75%,90%,to {
+        -webkit-animation-timing-function: cubic-bezier(.215,.61,.355,1);
+        animation-timing-function: cubic-bezier(.215,.61,.355,1)
+    }
+
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(-3000px,0,0) scaleX(3);
+        transform: translate3d(-3000px,0,0) scaleX(3)
+    }
+
+    60% {
+        opacity: 1;
+        -webkit-transform: translate3d(25px,0,0) scaleX(1);
+        transform: translate3d(25px,0,0) scaleX(1)
+    }
+
+    75% {
+        -webkit-transform: translate3d(-10px,0,0) scaleX(.98);
+        transform: translate3d(-10px,0,0) scaleX(.98)
+    }
+
+    90% {
+        -webkit-transform: translate3d(5px,0,0) scaleX(.995);
+        transform: translate3d(5px,0,0) scaleX(.995)
+    }
+
+    to {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0)
+    }
+}
+
+.animate__bounceInLeft {
+    -webkit-animation-name: bounceInLeft;
+    animation-name: bounceInLeft
+}
+
+.ani-duration-0750 {
+    animation-duration: 750ms;
+}
+
+.ani-duration-1750 {
+    animation-duration: 1750ms;
+}
+
+.ani-duration-2750 {
+    animation-duration: 2750ms;
+}
+
+.ani-duration-3750 {
+    animation-duration: 3750ms;
+}
+
+.ani-duration-4750 {
+    animation-duration: 4750ms;
+}
+
+.ani-duration-5750 {
+    animation-duration: 5750ms;
+}
+
+.ani-duration-6750 {
+    animation-duration: 6750ms;
+}
+
+.ani-duration-7750 {
+    animation-duration: 7750ms;
+}
+
+.ani-duration-8750 {
+    animation-duration: 8750ms;
+}
+
+.before-cursor:before {
+  content: '|';
+  opacity: 0;
+  color: black;
+  animation: blink 800ms linear infinite alternate;
+  letter-spacing: -4px;
+  font-weight: 700;
+}
+
+.after-cursor:after {
+  content: '|';
+  opacity: 0;
+  color: black;
+  animation: blink 800ms linear infinite alternate;
+  font-weight: 700;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#scroll-container {
+  height: 60vh;
+  overflow: hidden;
+}
+
+#scroll-body {
+  height: 100%;
+  text-align: center;
+}
+
+@media (min-width: 640px){
+    #scroll-body {
+      animation: scroll-big-screen 25s linear infinite;
+    }
+}
+
+@media (max-width: 640px){
+    #scroll-body {
+      animation: scroll-small-screen 25s linear infinite;
+    }
+}
+
+@keyframes scroll-big-screen {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(-400%);
+  }
+}
+
+@keyframes scroll-small-screen {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(-700%);
+  }
+}

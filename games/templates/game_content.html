@@ -1,0 +1,11 @@
+{% if status == 'registering' %}
+  {% include "registering.html" %}
+{% elif status == 'guessing' %}
+  {% include "guessing.html" %}
+{% elif status == 'voting' %}
+  {% include "voting.html" %}
+{% elif status == 'revealing' %}
+  {% include "revealing.html" %}
+{% elif status == 'complete' %}
+  {% include "complete.html" %}
+{% endif %}

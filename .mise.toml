@@ -1,0 +1,4 @@
+[tools]
+python = {version="3.11", virtualenv=".venv"}
+nodejs = {version="19.6"}
+redis = {version="7"}

@@ -1,0 +1,37 @@
+<div class="start-form-container">
+  <button id="join_reveal"
+    class="font-round text-center text-2xl uppercase w-72 {% if duplicate_warning %} hidden {% endif %}"
+    onclick='htmx.toggleClass(htmx.find("#join_form"), "hidden");
+             htmx.toggleClass(htmx.find("#join_reveal"), "hidden");
+             htmx.toggleClass(htmx.find("#tag-message"), "hidden");
+             htmx.toggleClass(htmx.find("#create_reveal"), "hidden");'>{{ join_button }}</button>
+
+   <div id="join_form" class="{% if not duplicate_warning %} hidden {% endif %} {{form_class}}">
+    <form action="/games/join/" method="post" class="flex flex-col items-center">
+      {% csrf_token %}
+      <div>
+        <div class="font-round font-semibold text-center uppercase">Player name</div>
+        <input type="text" name="nickname" style="text-transform: uppercase;"
+        required="required" value='{{ player_name }}' class="bg-lightteal border-lightteal rounded-sm">
+      </div>
+
+      <div>
+        <div class="font-round font-semibold mt-3 text-center uppercase">Game code</div>
+        <input type="text" name="code" style="text-transform: uppercase;"
+        required="required" value='{{ code }}' class="bg-lightteal border-lightteal rounded-sm">
+      </div>
+
+      <div class="justify-center flex mt-32 font-semibold uppercase">
+        <button type="submit" class="font-round uppercase">Join</button>
+        <div class="mx-2">
+          |
+        </div>
+        <div  onclick='htmx.toggleClass(htmx.find("#join_form"), "hidden");
+          htmx.toggleClass(htmx.find("#join_reveal"), "hidden");
+          htmx.toggleClass(htmx.find("#tag-message"), "hidden");
+          htmx.toggleClass(htmx.find("#create_reveal"), "hidden"); return false'
+          class="font-round cursor-pointer">Cancel</div>
+      </div>
+    </form>
+  </div>
+</div>

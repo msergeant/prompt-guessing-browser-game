@@ -1,0 +1,11 @@
+<div class="flex mt-5 flex-col sm:flex-row border-2 pb-3 sm:pb-0 shadow-2xl rounded-lg
+  bg-gradient-to-br to-gray-400 from-white">
+  <img src="{{ guess.img_src }}" class="mx-auto rounded-lg">
+  <div class="items-center mt-3 sm:mt-20 w-64 ">
+    <div class="uppercase">{{ guess.caption }}</div>
+    {% if guess.guesser %}
+      <div class="uppercase">- {{ guess.guesser }}</div>
+    {% endif %}
+    <div class="pt-4 uppercase">Votes: {{ guess.votes }}</div>
+  </div>
+</div>

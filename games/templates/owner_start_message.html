@@ -1,0 +1,20 @@
+<div class="mt-10 flex flex-col">
+  {% if game_full %}
+    <div>Game is full</div>
+  {% elif enough_players %}
+    <div class="text-center">Everyone in?</div>
+  {% endif %}
+
+  {% if enough_players %}
+  <div class="font-bold font-round text-xl uppercase flex flex-row mx-auto">
+    <button class="font-bold font-round uppercase" hx-post="/games/start/{{ code }}/">Start</button>
+    <div class="mx-2">|</div>
+    <button class="font-bold font-round uppercase" hx-post="/games/cancel/{{ code }}/">Cancel</button>
+  </div>
+  {% else %}
+    <div class="text-center">We need at least two players to begin.</div>
+    <div class="text-xl flex flex-row mx-auto pt-5">
+      <button class="font-bold font-round uppercase" hx-post="/games/cancel/{{ code }}/">Cancel</button>
+    </div>
+  {% endif %}
+</div>

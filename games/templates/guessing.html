@@ -1,0 +1,36 @@
+{% if already_guessed %}
+  {% include "already_guessed.html" %}
+  <div class="-mt-8 font-extrabold mr-3 sm:mx-auto sm:w-1/2 text-2xl text-right">
+    <p id="countdown_time" class="text-red-800"></p>
+  </div>
+{% else %}
+
+  {% include "round_picture_header.html" %}
+  <div class="-mt-8 font-extrabold mr-3 sm:mx-auto sm:w-1/2 text-2xl text-right">
+    <p id="countdown_time" class="min-h-lg text-red-800"></p>
+  </div>
+
+  <form hx-post="/games/make_guess/" hx-target="#game_content"
+    class="flex flex-col mt-5">
+    {% csrf_token %}
+    <textarea style="text-transform: uppercase; display:none;" id="guess-text" name="guess"
+    required="required" autocomplete="off" maxlength=50>{{guess}}</textarea>
+    {% if guess %}
+    <div id="guess-display" class="bg-lightteal h-20 mb-5 ml-4 px-3 py-1 sm:ml-52 uppercase w-60 after-cursor">{{guess}}</div>
+    {% else %}
+    <div id="guess-display" class="bg-lightteal h-20 mb-5 ml-4 px-3 py-1 sm:ml-52 uppercase w-60 placeholder before-cursor">What prompt generated this picture?</div>
+    {% endif %}
+
+    <input type="hidden" name="rownd_id" value="{{ rownd_id }}">
+    <input id="guess-submit" class="hidden" type="submit" value="Submit">
+  </form>
+
+  {% if duplicate %}
+    <div id="message-container" class="bg-red-600 fixed flex place-self-center rounded-lg sm:-translate-x-1/2 sm:left-1/2 text-center text-lg text-white top-1/4 uppercase z-10">
+      <div class="m-3"> Too similar to the real caption or another player's guess</div>
+      <div class="btn-close"
+           onclick='htmx.toggleClass(htmx.find("#message-container"), "hidden");'>
+      </div>
+    </div>
+  {% endif %}
+{% endif %}

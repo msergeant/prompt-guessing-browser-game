@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+  <main class="flex flex-wrap flex-col content-around bg-teal">
+    <img src=http://placekitten.com/200/200 class="h-40 px-10"></img>
+
+    <div id="tag-message" class="font-round text-center mt-2">
+      <p>A party game with</p>
+      <p>weird images & silly prompts</p>
+      <p>For 2-8 players</p>
+    </div>
+
+    {% if not existing_game_code %}
+    <div class="mt-20 mx-auto">
+      {% include "start_form.html" %}
+    </div>
+    {% endif %}
+
+    {% if existing_game_code %}
+    <div class="mt-20 mx-auto">
+      <a id="create_reveal" class="font-bold text-center text-2xl uppercase w-72" href='games/play/?code={{existing_game_code}}'>
+        Rejoin {{existing_game_code}}?
+      </a>
+    </div>
+    {% endif %}
+
+    <div class="mt-10 mx-auto">
+      {% include "join_form.html" with form_class="-mt-10"%}
+    </div>
+
+    <div class="text-center bottom-1 absolute text-xs left-1/2 -translate-x-1/2">
+      The owner of this site is not responsible for any<br> user generated content (prompt guesses, usernames)
+    </div>
+  </main>
+
+{% endblock %}
+

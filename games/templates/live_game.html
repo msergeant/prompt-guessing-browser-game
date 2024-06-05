@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{%block title %}
+Frog Sandwich - {{code}}
+{% endblock %}
+
+{% block content %}
+
+<div class="flex-grow bg-teal">
+
+  <div hx-ext="ws" {{ connect_code | safe }}>
+    <div id="game_content">
+      {% include 'game_content.html' %}
+    </div>
+  </div>
+
+  <div id="keyboard" class="{% if not show_keyboard %} hidden {% endif %}">
+    {% include 'keyboard.html' %}
+  </div>
+</div>
+
+{% endblock %}

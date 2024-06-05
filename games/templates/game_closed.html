@@ -1,0 +1,18 @@
+{% load static %}
+
+<div class="flex flex-col items-center text-lg">
+  <a href="/">
+    {% include "logo_block.html" %}
+  </a>
+
+  {% if cancelled %}
+    <div class="">This game has been cancelled</div>
+    <div class="">Click Home to start over</div>
+  {% else %}
+    <div class="">Thanks for playing!</div>
+    <div class="">This game code is closed</div>
+    <div class="">Click Home to play again</div>
+  {% endif %}
+
+  <a href="/" class="uppercase font-bold">Home</a>
+</div>

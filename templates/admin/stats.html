@@ -1,0 +1,43 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+
+<p>
+  <a href="{{link_previous}}">&lt;&lt;</a>
+  <a href="{{link_next}}">&gt;&gt;</a>
+</p>
+
+<p>Date: {{ date }}</p>
+<p>Games: {{ games_today }}</p>
+<p>Completed games: {{ completed_games_today }}</p>
+<p>Legit games: {{ legit_completed }}</p>
+
+
+{% if games %}
+  <div class="results">
+  <table id="result_list">
+  <thead>
+  <tr>
+    <th scope="col">
+      Code
+    </th>
+    <th scope="col">
+      Summary
+    </th>
+    <th scope="col">
+      Created
+    </th>
+    <th scope="col">
+      Owner
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for result in games %}
+    <tr>{% for item in result %}<td>{{ item | safe }}</td>{% endfor %}</tr>
+  {% endfor %}
+  </tbody>
+  </table>
+  </div>
+{% endif %}
+
+{% endblock %}

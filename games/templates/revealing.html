@@ -1,0 +1,38 @@
+{% load static %}
+
+{% if show_scoreboard %}
+
+  {% include "logo_block.html" %}
+  {% include "scoreboard.html" %}
+
+{% else %}
+
+{% include "round_picture_header.html" %}
+
+<div class="flex flex-col items-center">
+
+  {% if not reveal_data.correct %}
+  <div class="mb-1 mt-5 mx-5 text-center text-xl uppercase">
+      {{ reveal_data.text }}
+    </div>
+    <div class="uppercase animate__bounceInLeft">- {{ reveal_data.submitter }}</div>
+  {% else %}
+    <div class="mb-1 mt-5 mx-5 text-center text-froggreen text-xl uppercase animate-bounce">
+      {{ reveal_data.text }}
+    </div>
+    <div class="text-froggreen uppercase animate-bounce">- Actual Prompt</div>
+  {% endif %}
+
+  <div class="mt-10 uppercase">{{ reveal_data.vote_text }}:</div>
+
+  {% for i, player in reveal_data.players %}
+  <div class="uppercase animate__bounceInLeft ani-duration-{{ i }}750">{{ player }}</div>
+  {% endfor %}
+
+  {% if not reveal_data.players %}
+  <div>No one!</div>
+  {% endif %}
+
+</div>
+
+{% endif %}

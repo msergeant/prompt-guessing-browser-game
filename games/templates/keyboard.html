@@ -1,0 +1,135 @@
+<div class="flex justify-end -mt-24 mr-3">
+  <div id="submit-btn" class="btn cursor-pointer font-bold font-round mt-4 mx-0.5 p-2 rounded sm:mr-52 text-center text-l uppercase">Submit</div>
+</div>
+
+<div class="flex items-center justify-center mt-10">
+  {% for key in "qwertyuiop" %}
+  <div class="bg-lightteal cursor-pointer font-bold key-btn mx-0.5 py-2 rounded text-center text-xl uppercase w-8">{{ key }}</div>
+  {% endfor %}
+</div>
+
+<div class="flex items-center justify-center mt-0.5">
+  {% for key in "asdfghjkl" %}
+  <div class="bg-lightteal cursor-pointer font-bold key-btn mx-0.5 py-2 rounded text-center text-xl uppercase w-8">{{ key }}</div>
+  {% endfor %}
+</div>
+
+<div class="flex items-center justify-center mt-0.5">
+  {% for key in "zxcvbnm" %}
+  <div class="bg-lightteal cursor-pointer font-bold key-btn mx-0.5 py-2 rounded text-center text-xl uppercase w-8">{{ key }}</div>
+  {% endfor %}
+</div>
+
+<div class="flex items-center justify-center mt-0.5">
+  {% for key in ":,-" %}
+  <div class="bg-lightteal cursor-pointer font-bold key-btn mx-0.5 py-2 rounded text-center text-xl uppercase w-8">{{ key }}</div>
+  {% endfor %}
+  <div class="bg-lightteal cursor-pointer font-bold key-btn px-1.5 py-2 rounded text-center text-xl uppercase w-32">space</div>
+  <div class="bg-lightteal cursor-pointer font-bold key-btn mx-0.5 py-2 rounded text-center text-xl uppercase w-8">'</div>
+  <div id="del-btn" class="bg-lightteal cursor-pointer font-bold mx-0.5 p-2 rounded text-center text-xl uppercase">del</div>
+</div>
+
+<script type="text/javascript">
+  let check_placeholder = function (current_val, display) {
+    if(current_val.length == 0) {
+      display.textContent = "What prompt generated this picture?";
+      display.classList.add("placeholder");
+      display.classList.add("before-cursor");
+      display.classList.remove("after-cursor");
+    } else {
+      display.classList.remove("placeholder");
+      display.classList.add("after-cursor");
+      display.classList.remove("before-cursor");
+    }
+  };
+
+  let keyboard_click = function () {
+    let display = document.getElementById('guess-display');
+    let textarea = document.getElementById('guess-text');
+    let current_val = textarea.value;
+
+    if (!textarea) {
+      return;
+    }
+
+    if (this.textContent === "space") {
+      current_val += " ";
+    }
+    else {
+      current_val += this.textContent;
+    }
+    display.textContent = current_val;
+    textarea.value = current_val;
+
+    check_placeholder(current_val, display);
+  };
+
+  let delete_click = function () {
+    let display = document.getElementById('guess-display');
+    let textarea = document.getElementById('guess-text');
+    let current_val = textarea.value;
+
+    if (!textarea) {
+      return;
+    }
+
+    current_val = current_val.slice(0, -1);
+    display.textContent = current_val;
+    textarea.value = current_val;
+
+    check_placeholder(current_val, display);
+  };
+
+  let key_handler = function(the_key) {
+    let display = document.getElementById('guess-display');
+    let textarea = document.getElementById('guess-text');
+
+    if (!textarea) {
+      return;
+    }
+    let typed_char = the_key.key.toLowerCase();
+    let current_val = textarea.value;
+
+    if ("abcedefghijklmnopqrstuvwxyz:,-' ".includes(typed_char)) {
+      current_val += typed_char;
+    }
+    display.textContent = current_val;
+    textarea.value = current_val;
+
+    check_placeholder(current_val, display);
+  };
+
+  let submit_click = function() {
+    document.getElementById('guess-submit').click();
+  };
+
+  let keydown = function(event) {
+    if (event.keyCode == 8 || event.keyCode == 46) {
+      delete_click();
+    }
+    if (event.keyCode == 13) {
+      submit_click();
+    }
+  };
+
+  let check_keyboard_visibility = function() {
+    let textarea = document.getElementById('guess-text');
+    let keyboard = document.getElementById('keyboard');
+
+    if (textarea) {
+      keyboard.classList.remove('hidden');
+    } else {
+      keyboard.classList.add('hidden');
+    }
+  };
+
+  let keys = document.getElementsByClassName('key-btn');
+  for (let i = 0; i < keys.length; i++) {
+    keys[i].addEventListener('click', keyboard_click);
+  }
+  document.getElementById('del-btn').addEventListener('click', delete_click);
+  document.getElementById('submit-btn').addEventListener('click', submit_click);
+  document.addEventListener('keypress', key_handler);
+  document.addEventListener('keydown', keydown);
+  document.addEventListener('htmx:wsAfterMessage', check_keyboard_visibility);
+</script>

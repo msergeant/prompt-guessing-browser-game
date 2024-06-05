@@ -1,0 +1,47 @@
+{% load static %}
+
+<a href="/">
+  {% include "logo_block.html" %}
+</a>
+
+<div class="text-sm text-center">Tell other players to join with this code:</div>
+<div class="font-bold font-round text-5xl text-center">{{ code }}</div>
+<div class="text-sm text-center">or send them <a class="underline" href="#">this link</a></div>
+
+{% if is_owner %}
+  <div id="owner_message">
+    {% include "owner_start_message.html" %}
+  </div>
+{% else %}
+  <div class="mt-10 text-center">Welcome to this game started by {{ owner }}</div>
+{% endif %}
+
+<div class="mt-10 flex flex-col items-center text-center">
+  {% if registered and players %}
+  <div class="text-xl">Players</div>
+  <ul id="player-list" class="font-bold text-xl uppercase">
+    {% for player in players %}
+    {% if player.id == current_player_id %}
+    <li>{{ player.nickname }} (you)</li>
+    {% else %}
+    <li>{{ player.nickname }}</li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+  {% elif not registered %}
+    {% if game_full %}
+      <div class="text-warning text-xl">Sorry, this game is already full.</div>
+      <div class="text-xl mb-5">Would you like to start a new one?</div>
+      {% include "start_form.html" %}
+    {% else %}
+
+      <h3>Would you like to join?</h3>
+
+      {% if duplicate_warning %}
+        <h3 class="text-warning">{{ duplicate_warning }} </h3>
+      {% endif %}
+
+      {% include "join_form.html" with form_class="mt-3"%}
+    {% endif %}
+  {% endif %}
+</div>

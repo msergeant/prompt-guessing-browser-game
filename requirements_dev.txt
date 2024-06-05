@@ -1,0 +1,5 @@
+daphne
+flake8
+honcho
+ipython
+isort

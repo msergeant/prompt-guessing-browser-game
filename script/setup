@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+
+if [[ -x "$(command -v mise)" ]]; then
+	echo "==> Installing mise dependencies..."
+	mise install
+fi
+
+echo "==> Setting up venv..."
+python -m venv .venv
+
+mkdir media
+
+if [ ! -f picture_game/local_settings.py ]; then
+	cp picture_game/local_settings.example.py picture_game/local_settings.py
+fi
+
+script/bootstrap
+
+make seeds
+
+npm install
+
+python manage.py tailwind install

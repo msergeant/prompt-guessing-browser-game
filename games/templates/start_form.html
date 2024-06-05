@@ -1,0 +1,33 @@
+<div class="flex center">
+  <button id="create_reveal"
+    class="font-round text-center text-2xl uppercase w-72"
+    onclick='htmx.toggleClass(htmx.find("#game_form"), "hidden");
+             htmx.toggleClass(htmx.find("#create_reveal"), "hidden");
+             htmx.toggleClass(htmx.find("#tag-message"), "hidden");
+             htmx.toggleClass(htmx.find("#join_reveal"), "hidden");'>Start a game</button>
+
+  <div id="game_form" class="hidden">
+    <form action="/games/create/" method="post" class="flex flex-col items-center">
+      {% csrf_token %}
+      <div class="">
+        <div class="font-round font-semibold text-center uppercase">Player name</div>
+        <input type="text" name="nickname" style="text-transform: uppercase;"
+        required="required" value='{{ player_name }}' class="bg-lightteal border-lightteal rounded-sm">
+      </div>
+      <p class="mt-32">You will need at least 1 more player to play.</p>
+      <p>Others will be able to join once you click START.</p>
+
+      <div class="justify-center flex font-semibold mt-2 uppercase">
+        <button type="submit" class="font-round uppercase">Start</button>
+        <div class="mx-2">
+          |
+        </div>
+        <div onclick='htmx.toggleClass(htmx.find("#game_form"), "hidden");
+          htmx.toggleClass(htmx.find("#create_reveal"), "hidden");
+          htmx.toggleClass(htmx.find("#tag-message"), "hidden");
+          htmx.toggleClass(htmx.find("#join_reveal"), "hidden"); return false'
+          class="cursor-pointer font-round">Cancel</div>
+      </div>
+    </form>
+  </div>
+</div>

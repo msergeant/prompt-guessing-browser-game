@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>This page is only available in Development Mode</h1>
+  <p>Go <a class="underline hover:text-blue-500" href="/">Home</a> to see the non-dev start page</p>
+  <h2>Which game would you like to view?</h2>
+
+  {% for game in games %}
+  <p class="mt-10">
+    <a class="btn w-1/6" href='/games/play/?code={{game.code}}'>
+      View {{game.code}}
+    </a>
+  </p>
+  {% endfor %}
+
+{% endblock %}
+

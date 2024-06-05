@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="flex flex-col items-center">
+  <a href="/">
+    <img src=http://placekitten.com/200/200 class="h-40 px-10"></img>
+  </a>
+  <div class="mx-12 text-warning">Sorry, we could not find any registering games with that code.</div>
+  <div class="mb-10">Did you mean to enter a different code?</div>
+  {% include "join_form.html" with duplicate_warning=True %}
+</div>
+
+{% endblock %}
